@@ -1,0 +1,23 @@
+{
+  "name": "js-unhelp",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/js-unhelp.js",
+  "module": "src/common/index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kongkongbuding",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "fs-extra": "^8.0.1",
+    "rollup": "^1.10.1",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-terser": "^4.0.4"
+  }
+}
