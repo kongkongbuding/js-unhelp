@@ -6,7 +6,7 @@
 const X_PI = (3.14159265358979324 * 3000.0) / 180.0
 const A = 6378245.0
 const EE = 0.00669342162296594323
-const PI = Math.P
+const PI = Math.PI
 
 const transformLat = (lng, lat) => {
   let ret =
