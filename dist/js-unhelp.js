@@ -709,7 +709,28 @@
     decode: decode
   };
 
-  var index = _objectSpread({}, check, color, get, html, img, json, latlng, number, sort$1, string, time, window$1);
+  /**
+   * 
+   * @param {mouseEvent} event 
+   * @param {dom} dom 
+   */
+  var calcMousePosition = function calcMousePosition(event, dom) {
+    if (!event || !dom) return false;
+    var box = dom.getBoundingClientRect();
+    var d = dom.ownerDocument.documentElement;
+    var dx = box.left + window.pageXOffset - d.clientLeft;
+    var dy = box.top + window.pageYOffset - d.clientTop;
+    return {
+      x: (event.clientX - dx) / dom.clientWidth * 2 - 1,
+      y: -((event.clientY - dy) / dom.clientHeight) * 2 + 1
+    };
+  };
+
+  var mouse = {
+    calcMousePosition: calcMousePosition
+  };
+
+  var index = _objectSpread({}, check, color, get, html, img, json, latlng, number, sort$1, string, time, window$1, mouse);
 
   return index;
 

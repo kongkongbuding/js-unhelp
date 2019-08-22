@@ -10,6 +10,7 @@ import sort from './sort'
 import string from './string'
 import time from './time'
 import window from './window'
+import mouse from './mouse'
 
 
 export default {
@@ -24,5 +25,6 @@ export default {
   ...sort,
   ...string,
   ...time,
-  ...window
+  ...window,
+  ...mouse
 }

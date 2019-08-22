@@ -11,7 +11,7 @@
   var X_PI = 3.14159265358979324 * 3000.0 / 180.0;
   var A = 6378245.0;
   var EE = 0.00669342162296594323;
-  var PI = Math.P;
+  var PI = Math.PI;
 
   var transformLat = function transformLat(lng, lat) {
     var ret = -100.0 + 2.0 * lng + 3.0 * lat + 0.2 * lat * lat + 0.1 * lng * lat + 0.2 * Math.sqrt(Math.abs(lng));
