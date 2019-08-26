@@ -1,6 +1,6 @@
 {
   "name": "js-unhelp",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "dist/js-unhelp.js",
   "module": "src/common/index.js",
