@@ -9,9 +9,13 @@ const calcMousePosition = (event, dom) => {
   let d = dom.ownerDocument.documentElement;
   let dx = box.left + window.pageXOffset - d.clientLeft;
   let dy = box.top + window.pageYOffset - d.clientTop;
+  // return {
+  //   x: ((event.clientX - dx) / dom.clientWidth) * 2 - 1,
+  //   y: -((event.clientY - dy) / dom.clientHeight) * 2 + 1
+  // }
   return {
-    x: ((event.clientX - dx) / dom.clientWidth) * 2 - 1,
-    y: -((event.clientY - dy) / dom.clientHeight) * 2 + 1
+    x: event.clientX - dx,
+    y: event.clientY - dy
   }
 }
 
