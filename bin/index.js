@@ -28,10 +28,12 @@ const config = fs.readJsonSync(configPath)
 const { es5except } = config
 
 fs.readdirSync(path).forEach(function(file) {
+
   let pathname = path + '/' + file
   let filename = 'dist/' + file
   let name = file.split('.')[0]
-  var moduleConfig = {
+
+  let moduleConfig = {
     input: pathname,
     output: {
       file: filename,
@@ -40,8 +42,11 @@ fs.readdirSync(path).forEach(function(file) {
     },
     plugins: []
   }
+
   if (es5except.indexOf(file) === -1) moduleConfig.plugins.push(babel())
+
   rollupConfig.push(moduleConfig)
+
 })
 
 export default rollupConfig

@@ -20,15 +20,15 @@
 
 
   var hitArea = function hitArea(point, polygon) {
-    var x = point[0],
-        y = point[1];
+    var x = point[0];
+    var y = point[1];
     var inside = false;
 
     for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-      var xi = polygon[i][0],
-          yi = polygon[i][1];
-      var xj = polygon[j][0],
-          yj = polygon[j][1];
+      var xi = polygon[i][0];
+      var yi = polygon[i][1];
+      var xj = polygon[j][0];
+      var yj = polygon[j][1];
       var intersect = yi > y != yj > y && x < (xj - xi) * (y - yi) / (yj - yi) + xi;
       if (intersect) inside = !inside;
     }
@@ -46,14 +46,14 @@
 
 
   var hitLine = function hitLine(lp, _l_ll, _l_d, loop, returnI) {
-    var hit = false,
-        index = -1;
+    var hit = false;
+    var index = -1;
     if (_l_ll.length < 2) return hit;
     if (!!loop) _l_ll.push(_l_ll[0]);
 
     for (var i = 0, _l_len = _l_ll.length - 1; i < _l_len; i++) {
-      var _l_a = _l_ll[i],
-          _l_b = _l_ll[i + 1];
+      var _l_a = _l_ll[i];
+      var _l_b = _l_ll[i + 1];
 
       if (lp.x < Math.max(_l_a.x, _l_b.x) + _l_d && lp.x > Math.min(_l_a.x, _l_b.x) - _l_d && lp.y < Math.max(_l_a.y, _l_b.y) + _l_d && lp.y > Math.min(_l_a.y, _l_b.y) - _l_d) {
         if (_l_a.x == _l_b.x) {

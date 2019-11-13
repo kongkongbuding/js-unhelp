@@ -16,14 +16,19 @@ const reverseString = v =>
 
 // 随机字符串
 const randomString = n => {
+
   let tmp = '',
     i = 0
+
   for (; i < n; i++)
     tmp += String.fromCharCode(Math.round(Math.random() * 26) + 97)
+
   return tmp
+
 }
 
 export default {
+
   trim,
   trimLeft,
   trimRight,
@@ -31,4 +36,5 @@ export default {
   padRight,
   reverseString,
   randomString
+  
 }

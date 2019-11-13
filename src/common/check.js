@@ -10,6 +10,15 @@ const isArray = v => O.call(v) === '[object Array]'
 // 对象
 const isObject = v => O.call(v) === '[object Object]'
 
+// undefied
+const isUndefined = v => typeof v === 'undefined'
+
+// boolean
+const isBoolean = v => typeof v === 'boolean'
+
+// null
+const isNull = v => !v && typeof v === "object"
+
 // 方法
 const isFunction = v => O.call(v) === '[object Function]'
 
@@ -57,8 +66,11 @@ const isFalse = v => v === false
 
 // ie
 const isIE = () => {
+
   if ('ActiveXObject' in window) return /MSIE (\d+)/.test(UA) ? RegExp.$1 : 11
+
   return false
+
 }
 
 // android
@@ -68,9 +80,13 @@ const isAndroid = () => UA.indexOf('Android') > -1 || UA.indexOf('Adr') > -1
 const isIOS = () => /\(i[^;]+;( U;)? CPU.+Mac OS X/.test(UA)
 
 export default {
+
   isString,
   isArray,
   isObject,
+  isUndefined,
+  isBoolean,
+  isNull,
   isFunction,
   isDate,
   isFile,
@@ -86,4 +102,5 @@ export default {
   isIE,
   isAndroid,
   isIOS
+  
 }

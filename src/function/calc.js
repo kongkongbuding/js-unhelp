@@ -12,19 +12,27 @@ const dist = (p1, p2) =>
  * @param {*} polygon 
  */
 const hitArea = (point, polygon) => {
-  let x = point[0],
-    y = point[1]
+
+  let x = point[0]
+  let y = point[1]
+
   let inside = false
+
   for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-    let xi = polygon[i][0],
-      yi = polygon[i][1]
-    let xj = polygon[j][0],
-      yj = polygon[j][1]
-    let intersect =
-      yi > y != yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi
+    
+    let xi = polygon[i][0]
+    let yi = polygon[i][1]
+    let xj = polygon[j][0]
+    let yj = polygon[j][1]
+
+    let intersect = yi > y != yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi
+
     if (intersect) inside = !inside
+
   }
+
   return inside
+
 }
 
 /**
@@ -37,16 +45,18 @@ const hitArea = (point, polygon) => {
  */
 
 const hitLine = (lp, _l_ll, _l_d, loop, returnI) => {
-  let hit = false,
-    index = -1
+
+  let hit = false
+  let index = -1
 
   if (_l_ll.length < 2) return hit
 
   if (!!loop) _l_ll.push(_l_ll[0])
 
   for (let i = 0, _l_len = _l_ll.length - 1; i < _l_len; i++) {
-    let _l_a = _l_ll[i],
-      _l_b = _l_ll[i + 1]
+
+    let _l_a = _l_ll[i]
+    let _l_b = _l_ll[i + 1]
 
     if (
       lp.x < Math.max(_l_a.x, _l_b.x) + _l_d &&
@@ -54,19 +64,31 @@ const hitLine = (lp, _l_ll, _l_d, loop, returnI) => {
       lp.y < Math.max(_l_a.y, _l_b.y) + _l_d &&
       lp.y > Math.min(_l_a.y, _l_b.y) - _l_d
     ) {
+
       if (_l_a.x == _l_b.x) {
+
         if (Math.abs(lp.x - _l_a.x) <= _l_d) {
+
           hit = true
           index = i + 1
+
           break
+
         }
+
       } else if (_l_a.y == _l_b.y) {
+
         if (Math.abs(lp.y - _l_a.y) <= _l_d) {
+
           hit = true
           index = i + 1
+
           break
+
         }
+
       } else {
+
         let _la = _l_b.y - _l_a.y,
           _lb = _l_a.x - _l_b.x,
           _lc = _l_a.y * _l_b.x - _l_a.x * _l_b.y,
@@ -76,16 +98,24 @@ const hitLine = (lp, _l_ll, _l_d, loop, returnI) => {
           )
 
         if (_l_calc_d <= _l_d) {
+
           hit = true
           index = i + 1
+
           break
+
         }
+
       }
+
     }
+
   }
 
   if (!!returnI) return { hit: hit, index: index }
+
   return hit
+  
 }
 
 /**
@@ -98,6 +128,7 @@ const hitLine = (lp, _l_ll, _l_d, loop, returnI) => {
  * @param lp 点击位置
  */
 const hitRect = (_trotate, _x, _y, _tx, _ty, lp) => {
+
   let _xy = Math.atan(_y / _x),
     _cgm =
       Math.abs(
@@ -118,8 +149,11 @@ const hitRect = (_trotate, _x, _y, _tx, _ty, lp) => {
  * 阶乘 不能用for
  */
 const factorial = n => {
+
   if (n === 1) return 1
+
   return n * factorial(n - 1)
+
 }
 
 /**
@@ -138,15 +172,21 @@ const BEZ = (n, k, t) => C(n, k) * Math.pow(t, k) * Math.pow(1 - t, n - k)
  * bezier
  */
 const PBezier = (arr, l, t) => {
+
   let px = 0,
     py = 0,
     n = l - 1
+
   for (let i = 0, b; i < l; i++) {
+
     b = BEZ(n, i, t)
     px += arr[i].x * b
     py += arr[i].y * b
+
   }
+
   return [px, py]
+
 }
 
 /**
@@ -154,18 +194,23 @@ const PBezier = (arr, l, t) => {
  * @param {array} v 
  */
 const getMaxProfit = v => {
+
   if (v.length < 2) return 0
+
   let mP = v[0],
     max = 0,
     i = 0,
     len = v.length
+    
   for (; i < len; i++)
     (mP = Math.min(mP, v[i])), (max = Math.max(max, v[i] - mP))
 
   return max
+
 }
 
 export default {
+
   dist,
   hitArea,
   hitLine,
@@ -173,4 +218,5 @@ export default {
   factorial,
   PBezier,
   getMaxProfit
+  
 }

@@ -87,6 +87,21 @@
 
   var isObject = function isObject(v) {
     return O.call(v) === '[object Object]';
+  }; // undefied
+
+
+  var isUndefined = function isUndefined(v) {
+    return typeof v === 'undefined';
+  }; // boolean
+
+
+  var isBoolean = function isBoolean(v) {
+    return typeof v === 'boolean';
+  }; // null
+
+
+  var isNull = function isNull(v) {
+    return !v && _typeof(v) === "object";
   }; // 方法
 
 
@@ -169,6 +184,9 @@
     isString: isString,
     isArray: isArray,
     isObject: isObject,
+    isUndefined: isUndefined,
+    isBoolean: isBoolean,
+    isNull: isNull,
     isFunction: isFunction,
     isDate: isDate,
     isFile: isFile,

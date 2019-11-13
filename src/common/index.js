@@ -1,3 +1,8 @@
+/**
+ * @author kongkongbuding
+ * @since 2019.08.08
+ */
+
 import check from './check'
 import color from './color'
 import get from './get'
@@ -14,6 +19,7 @@ import mouse from './mouse'
 
 
 export default {
+
   ...check,
   ...color,
   ...get,
@@ -27,4 +33,5 @@ export default {
   ...time,
   ...window,
   ...mouse
+  
 }
