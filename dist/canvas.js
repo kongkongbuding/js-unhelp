@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.canvas = factory());
+  (global = global || self, global.canvasHelp = factory());
 }(this, function () { 'use strict';
 
   /**
@@ -38,6 +38,61 @@
     _can.toBlob(function (blob) {
       saveAs(blob, name + '.png');
     });
+  };
+  /**
+   * 
+   * @param {img.src / File} image 
+   * @param {最大宽度} maxWidth 
+   * @param {最大高度} maxHeight 
+   * @param {回调} callBack 
+   */
+
+
+  var compressImage = function compressImage(image) {
+    var maxWidth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 400;
+    var maxHeight = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 400;
+    var callBack = arguments.length > 3 ? arguments[3] : undefined;
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    var img = new Image();
+
+    img.onload = function () {
+      var originWidth = this.width;
+      var originHeight = this.height;
+      var targetWidth = originWidth;
+      var targetHeight = originHeight;
+
+      if (originWidth > maxWidth || originHeight > maxHeight) {
+        if (originWidth / originHeight > maxWidth / maxHeight) {
+          targetWidth = maxWidth;
+          targetHeight = Math.round(maxWidth * (originHeight / originWidth));
+        } else {
+          targetHeight = maxHeight;
+          targetWidth = Math.round(maxHeight * (originWidth / originHeight));
+        }
+      }
+
+      canvas.width = targetWidth;
+      canvas.height = targetHeight;
+      context.clearRect(0, 0, targetWidth, targetHeight);
+      context.drawImage(img, 0, 0, targetWidth, targetHeight);
+      document.body.appendChild(canvas);
+      canvas.toBlob(function (blob) {
+        callBack && callBack(blob);
+      }, image.type || 'image/png');
+    };
+
+    if (image instanceof File) {
+      var fileReader = new FileReader();
+
+      fileReader.onload = function (e) {
+        img.src = e.target.result;
+      };
+
+      fileReader.readAsDataURL(image);
+    } else {
+      img.src = image;
+    }
   };
   /**
    * 设置样式
@@ -254,7 +309,8 @@
     drawEllipse: drawEllipse,
     drawJt: drawJt,
     drawText: drawText,
-    dealPointColor: dealPointColor
+    dealPointColor: dealPointColor,
+    compressImage: compressImage
   };
 
   return canvas;

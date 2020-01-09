@@ -31,7 +31,7 @@ fs.readdirSync(path).forEach(function(file) {
 
   let pathname = path + '/' + file
   let filename = 'dist/' + file
-  let name = file.split('.')[0]
+  let name = file.split('.')[0] + 'Help'
 
   let moduleConfig = {
     input: pathname,

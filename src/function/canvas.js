@@ -33,6 +33,77 @@ const saveCanvas = (canvas, { name = Math.random(), bgc = '#fff' }) => {
 }
 
 /**
+ * 
+ * @param {img.src / File} image 
+ * @param {最大宽度} maxWidth 
+ * @param {最大高度} maxHeight 
+ * @param {回调} callBack 
+ */
+const compressImage = (image, maxWidth = 400, maxHeight = 400, callBack) => {
+
+  let canvas = document.createElement('canvas')
+  let context = canvas.getContext('2d')
+  let img = new Image()
+
+  img.onload = function () {
+
+    let originWidth = this.width
+    let originHeight = this.height
+    let targetWidth = originWidth
+    let targetHeight = originHeight
+
+    if (originWidth > maxWidth || originHeight > maxHeight) {
+
+      if (originWidth / originHeight > maxWidth / maxHeight) {
+
+        targetWidth = maxWidth
+        targetHeight = Math.round(maxWidth * (originHeight / originWidth))
+        
+      } else {
+
+        targetHeight = maxHeight
+        targetWidth = Math.round(maxHeight * (originWidth / originHeight))
+
+      }
+
+    }
+
+    canvas.width = targetWidth
+    canvas.height = targetHeight
+    context.clearRect(0, 0, targetWidth, targetHeight)
+    context.drawImage(img, 0, 0, targetWidth, targetHeight)
+    
+    document.body.appendChild(canvas)
+
+    canvas.toBlob(function (blob) {
+     
+      callBack && callBack(blob)
+      
+    }, image.type || 'image/png')
+
+  }
+
+  if ( image instanceof File ) {
+
+    let fileReader = new FileReader()
+
+    fileReader.onload = e => {
+
+      img.src = e.target.result
+
+    }
+
+    fileReader.readAsDataURL(image)
+
+  } else {
+
+    img.src = image
+
+  }
+
+}
+
+/**
  * 设置样式
  * @param {canvas.getContext('2d')} ctx 
  * @param {样式} style 
@@ -300,6 +371,7 @@ export default {
   drawEllipse,
   drawJt,
   drawText,
-  dealPointColor
-  
+  dealPointColor,
+  compressImage
+
 }

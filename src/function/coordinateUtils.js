@@ -280,11 +280,11 @@ const wgs84toCgcs2000 = (lat, lng) => {
   dLat = (dLat * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * pi)
   dLon = (dLon * 180.0) / (a / sqrtMagic * Math.cos(radLat) * pi)
 
-  let lat = lat + dLat
-  let lon = lng + dLon
+  lat = lat + dLat
+  lng = lng + dLon
 
-  point.lat=lat
-  point.lng=lon
+  point.lat = lat
+  point.lng = lng
 
   return point
 

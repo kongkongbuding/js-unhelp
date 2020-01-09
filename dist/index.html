@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <meta charset=utf-8>
+    <meta http-equiv=X-UA-Compatible content="IE=edge">
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <script src="./canvas.js"></script>
+  </head>
+  <body>
+    <input type="file" onchange="selectImage(this)"/>
+    <script>
+      function selectImage(e) {
+        var file = e.files[0]
+        
+        canvasHelp.compressImage(file, 400, 400, function(bolt) {
+          console.log(bolt)
+        })
+      }
+    </script>
+  </body>
+</html>
