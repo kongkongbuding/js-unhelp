@@ -42,10 +42,23 @@ const toAbsNum = v => {
 
 }
 
+// 有效位数保留
+const signFigures = (num, dec) => {
+
+  dec = dec == void 0 ? 1 : dec
+
+  let toExponential = (+num).toExponential(dec)
+  let max = Number(toExponential)
+
+  return max
+
+}
+
 export default {
 
   toNumber,
   toInteger,
-  toAbsNum
+  toAbsNum,
+  signFigures
   
 }
