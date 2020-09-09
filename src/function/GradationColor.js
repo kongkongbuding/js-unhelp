@@ -1,4 +1,3 @@
-import { isArray } from "./common"
 
 /**
  * 渐变色
@@ -6,11 +5,13 @@ import { isArray } from "./common"
  * @since 2019.10.28
  */
 
+import Color from './Color'
+
 class GradationColor {
   /**
    * 
    */
-  color = new THREE.Color()
+  color = new Color()
   /**
    * 
    */
@@ -34,13 +35,13 @@ class GradationColor {
 
       colors.map(v => {
 
-        if (isArray(v)) {
+        if (Array.isArray(v)) {
 
           fmtColors.push(v)
 
         } else {
 
-          let color = new THREE.Color(v)
+          let color = new Color(v)
 
           fmtColors.push([color.r * 255, color.g * 255, color.b * 255])
 
