@@ -78,7 +78,7 @@ const outOfChina = (lng, lat) => {
  * @param lat BD09 坐标经度
  * @return GCJ02 坐标：[经度，纬度]
  */
-bd09ToGcj02 = (lng, lat) =>
+const bd09ToGcj02 = (lng, lat) =>
  {
   let x = lng - 0.0065,
     y = lat - 0.006,
@@ -87,7 +87,10 @@ bd09ToGcj02 = (lng, lat) =>
     gg_lng = z * Math.cos(theta),
     gg_lat = z * Math.sin(theta)
 
-  return [gg_lng, gg_lat]
+  return {
+    lng: gg_lng,
+    lat: gg_lat
+  }
 
 }
 
@@ -105,7 +108,10 @@ const gcj02ToBd09 = (lng, lat) => {
     bd_lng = z * Math.cos(theta) + 0.0065,
     bd_lat = z * Math.sin(theta) + 0.006
 
-  return [bd_lng, bd_lat]
+  return {
+    lng: bd_lng,
+    lat: bd_lat
+  }
 
 }
 
@@ -120,7 +126,7 @@ const gcj02ToBd09 = (lng, lat) => {
 
   if (outOfChina(lng, lat)) {
 
-    return [lng, lat]
+    return { lng, lat }
 
   }
 
@@ -139,7 +145,10 @@ const gcj02ToBd09 = (lng, lat) => {
   let mglat = lat + dlat,
     mglng = lng + dlng
 
-  return [lng * 2 - mglng, lat * 2 - mglat]
+  return {
+    lng: lng * 2 - mglng,
+    lat: lat * 2 - mglat
+  }
 
 }
 
@@ -154,7 +163,7 @@ const wgs84ToGcj02 = (lng, lat) => {
 
   if (outOfChina(lng, lat)) {
 
-    return [lng, lat]
+    return { lng, lat }
 
   }
 
@@ -173,7 +182,10 @@ const wgs84ToGcj02 = (lng, lat) => {
   let mglat = lat + dlat,
     mglng = lng + dlng
 
-  return [mglng, mglat]
+  return {
+    lng: mglng,
+    lat: mglat
+  }
 
 }
 
@@ -209,8 +221,9 @@ const wgs84ToBd09 = (lng, lat) => {
 
 /**
  * WGS84 坐标转 Cgcs2000 坐标
+ * 结果好像不大对劲...
  */
-const wgs84toCgcs2000 = (lat, lng) => {
+const wgs84toCgcs2000 = (lng, lat) => {
 
   let pi = 3.14159265358979324
   let a = 6378245.0
