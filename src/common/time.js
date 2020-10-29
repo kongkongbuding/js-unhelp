@@ -2,6 +2,15 @@
 const webapiTime = v =>
   new Date(v.replace(/^(\d{4})-(\d{2})-(\d{2})[ T](.*)$/, '$1/$2/$3 $4'))
 
+// 获取月底时间
+const getMonthEndTime = v => {
+  
+  let spv = v.split['-']
+
+  return new Date(new Date(spv[0],spv[1]).getTime() - 1 + 8 * 3600000).toISOString().split('.').shift().replace('T', ' ')
+
+}
+
 
 let t = window.performance.timing
 
@@ -28,6 +37,8 @@ let windowTime = {
 export default {
 
   webapiTime,
+
+  getMonthEndTime,
 
   windowTime
   
