@@ -11,6 +11,8 @@ const getMonthEndTime = v => {
 
 }
 
+// 月份变换
+const getPreMonthDayTime = preMonth => new Date(new Date().setMonth(new Date().getMonth() - 1 + preMonth) + 3600000 * 8).toISOString().split('T').shift()
 
 let t = window.performance.timing
 
